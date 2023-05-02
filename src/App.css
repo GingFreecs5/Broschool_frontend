@@ -1,3 +1,16 @@
-.bgimg{
-    background-image: url(./assets/desktop-wallpaper-website-background-website-login-page-background\ 1.png);
+
+.bgImg{
+ 
+    background: url(./assets/desktop-wallpaper-website-background-website-login-page-background\ 1.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+}
+
+.card_class{
+  background-color: #EDE9E9;
+  margin-top: 200px;
+  border-radius: 30px;
 }
