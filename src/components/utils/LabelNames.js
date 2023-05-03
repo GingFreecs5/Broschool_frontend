@@ -1,0 +1,10 @@
+export const firstName = "First Name";
+export const email = "Email";
+export const lastName = "Last Name";
+export const password = "Password";
+export const birthDate = "Birtch Date";
+export const residenceTown = "Residence Town";
+export const schoolName = "School Name";
+export const schoolLevel = "School Level";
+export const loginButton = "Login";
+export const signupButton = "Signup";

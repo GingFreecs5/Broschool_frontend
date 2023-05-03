@@ -12,6 +12,22 @@
 .card_class{
  
   background-color: #EDE9E9;
-  margin-top: 200px;
+  margin-top: 20%;
   border-radius: 30px;
 }
+
+@media screen and (max-width: 780px) { 
+
+  .imgClass{ display: none; }
+  .form_container{
+   align-self: center;
+
+  } 
+
+  
+  }
+  @media screen and (max-width:400px) {
+    .loginContainer{
+      column-gap: 4/5;
+    }
+  }
