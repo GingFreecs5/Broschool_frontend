@@ -3,19 +3,28 @@ import "../App.css";
 import MyButton from "../components/login/MyButton";
 import ImgLearning from "../assets/shutterstock1067946317-1_750_1080-removebg-preview 1.png";
 import Logo from "../components/Logo";
+import { useForm } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
 import {
+  backButton,
   birthDate,
   loginButton,
   residenceTown,
   schoolLevel,
   schoolName,
   signupButton,
+  signupText,
 } from "../components/utils/LabelNames";
 function SignupNext() {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
   return (
     <div className="d-flex flex-row bgImg">
-      <div className="loginContainer  mx-auto ">
-        <div className="card_class d-flex flex-column flex-wrap  gap-4  p-5">
+      <div className="loginContainer col-xxl-6 col-xl-7 col-lg-9 col-md-10 col-12   mx-auto ">
+        <div className="card_class d-flex flex-column flex-wrap  gap-4  p-5 mx-3">
           <div className=" flex-row flex-wrap d-flex justify-content-between   ">
             <Logo className={"flex-column"} />
             <MyButton
@@ -31,56 +40,121 @@ function SignupNext() {
             />
           </div>
           <div className="form_container flex-wrap d-flex justify-content-between  align-items-center  flex-row ">
-            <div className="d-flex mx-5  flex-row flex-column gap-3  ">
-              <span
-                className="flex-column"
-                style={{
-                  color: "#000000",
-                  fontWeight: "bold",
-                }}
-              >
-                Sign up
-              </span>
-              <div className="d-flex flex-column gap-3 align-items-center">
-                <input
-                  type="text"
-                  style={{ borderRadius: "10px" }}
-                  className=" flex-column form-control "
-                  placeholder={birthDate}
-                ></input>
-                <input
-                  type="text"
-                  style={{ borderRadius: "10px" }}
-                  className=" flex-column form-control "
-                  placeholder={residenceTown}
-                ></input>
-                <input
-                  type="text"
-                  style={{ borderRadius: "10px" }}
-                  className=" flex-column form-control "
-                  placeholder={schoolName}
-                ></input>
-                <input
-                  type="text"
-                  style={{ borderRadius: "10px" }}
-                  className="flex-column form-control "
-                  placeholder={schoolLevel}
-                ></input>
-                <div className="d-flex align-items-center gap-3">
-                  <MyButton
-                    className={"flex-column"}
-                    bgColor={"#4D77E3"}
-                    color={"white"}
-                    text={signupButton}
-                    textSize={14}
-                    fontWeight={500}
-                    paddingY={"7px"}
-                    paddingX={"30px"}
-                  />
+            <form onSubmit={handleSubmit(() => alert("logged"))}>
+              <div className="d-flex mx-5  flex-row flex-column gap-3  ">
+                <span
+                  className="flex-column"
+                  style={{
+                    color: "#000000",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {signupText}
+                </span>
+                <div className="d-flex flex-column gap-3 ">
+                  <div>
+                    {" "}
+                    <input
+                      {...register("birthDate", {
+                        required: "This field is required",
+                      })}
+                      type="text"
+                      style={{ borderRadius: "10px" }}
+                      className=" flex-column form-control "
+                      placeholder={birthDate}
+                    />
+                    <ErrorMessage
+                      errors={errors}
+                      name="birthDate"
+                      render={({ message }) => (
+                        <p className="error_alert">{message}</p>
+                      )}
+                    />
+                  </div>
+                  <div>
+                    {" "}
+                    <input
+                      {...register("residenceTown", {
+                        required: "This field is required",
+                      })}
+                      type="text"
+                      style={{ borderRadius: "10px" }}
+                      className=" flex-column form-control "
+                      placeholder={residenceTown}
+                    />{" "}
+                    <ErrorMessage
+                      errors={errors}
+                      name="residenceTown"
+                      render={({ message }) => (
+                        <p className="error_alert">{message}</p>
+                      )}
+                    />
+                  </div>
+                  <div>
+                    <input
+                      {...register("schoolName", {
+                        required: "This field is required",
+                      })}
+                      type="text"
+                      style={{ borderRadius: "10px" }}
+                      className=" flex-column form-control "
+                      placeholder={schoolName}
+                    />{" "}
+                    <ErrorMessage
+                      errors={errors}
+                      name="schoolName"
+                      render={({ message }) => (
+                        <p className="error_alert">{message}</p>
+                      )}
+                    />
+                  </div>
+                  <div>
+                    {" "}
+                    <input
+                      {...register("schoolLevel", {
+                        required: "This field is required",
+                      })}
+                      type="text"
+                      style={{ borderRadius: "10px" }}
+                      className="flex-column form-control "
+                      placeholder={schoolLevel}
+                    />{" "}
+                    <ErrorMessage
+                      errors={errors}
+                      name="schoolLevel"
+                      render={({ message }) => (
+                        <p className="error_alert">{message}</p>
+                      )}
+                    />
+                  </div>
+
+                  <div className="d-flex align-items-center gap-3">
+                    <MyButton
+                      className={"flex-column"}
+                      bgColor={"#4D77E3"}
+                      color={"white"}
+                      text={backButton}
+                      link={"/signup/1"}
+                      textSize={14}
+                      fontWeight={500}
+                      paddingY={"7px"}
+                      paddingX={"30px"}
+                    />
+                    <MyButton
+                      className={"flex-column"}
+                      bgColor={"#4D77E3"}
+                      color={"white"}
+                      text={signupButton}
+                      textSize={14}
+                      fontWeight={500}
+                      paddingY={"7px"}
+                      paddingX={"30px"}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="flex-row mx-5 ">
+            </form>
+            <div className="flex-row  ">
               <img
                 className="imgClass"
                 src={ImgLearning}

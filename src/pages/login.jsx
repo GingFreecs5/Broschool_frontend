@@ -1,14 +1,27 @@
 import React from "react";
 import "../App.css";
 import MyButton from "../components/login/MyButton";
-import { email, password, signupButton } from "../components/utils/LabelNames";
+import {
+  email,
+  loginText,
+  password,
+  signupButton,
+} from "../components/utils/LabelNames";
 import ImgLearning from "../assets/elearning-portals-cover-picture 1.png";
 import Logo from "../components/Logo";
+import { useForm } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
 function Login() {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
   return (
-    <div className="d-flex flex-row bgImg">
-      <div className="loginContainer  mx-auto ">
-        <div className="card_class d-flex flex-column flex-wrap  gap-4  p-5  ">
+    <div className="d-flex flex-row  bgImg">
+      <div className="loginContainer col-xxl-6 col-xl-7 col-lg-9 col-md-10 col-12 mx-auto ">
+        <div className="card_class d-flex flex-column flex-wrap  gap-4  p-5  mx-3 ">
           <div className=" flex-row flex-wrap d-flex justify-content-between   ">
             <Logo className={"flex-column"} />
             <MyButton
@@ -24,51 +37,74 @@ function Login() {
             />
           </div>
           <div className="form_container flex-wrap d-flex justify-content-between  align-items-center flex-row ">
-            <div className="d-flex mx-5  flex-row flex-column gap-3  ">
-              <span
-                className="flex-column"
-                style={{
-                  color: "#000000",
-                  fontWeight: "bold",
-                }}
-              >
-                Login to your account
-              </span>
-              <input
-                type="email"
-                style={{ borderRadius: "10px" }}
-                className=" flex-column form-control "
-                placeholder={email}
-              ></input>
-              <input
-                type="password"
-                style={{ borderRadius: "10px" }}
-                className="flex-column form-control "
-                placeholder={password}
-              ></input>
-              <div className="d-flex align-items-center gap-3">
-                <a
-                  href="/"
+            <form onSubmit={handleSubmit(() => alert("hello"))}>
+              <div className="d-flex mx-5  flex-row flex-column gap-3  ">
+                <span
+                  className="flex-column"
                   style={{
-                    color: "gray",
-                    textDecoration: "none",
-                    fontSize: 15,
+                    color: "#000000",
+                    fontWeight: "bold",
                   }}
                 >
-                  Forget password ?
-                </a>
-                <MyButton
-                  className={"flex-column"}
-                  bgColor={"#4D77E3"}
-                  color={"white"}
-                  text={"Login"}
-                  textSize={14}
-                  fontWeight={500}
-                  paddingY={"7px"}
-                  paddingX={"30px"}
+                  {loginText}
+                </span>
+                <input
+                  {...register("email", { required: "This field is required" })}
+                  type="email"
+                  style={{ borderRadius: "10px" }}
+                  className=" flex-column form-control "
+                  placeholder={email}
                 />
+                <ErrorMessage
+                  errors={errors}
+                  name="email"
+                  render={({ message }) => (
+                    <p className="error_alert">{message}</p>
+                  )}
+                />
+
+                <div className="valid-feedback">Looks good!</div>
+                <input
+                  {...register("password", {
+                    required: "This field is required",
+                  })}
+                  type="password"
+                  style={{ borderRadius: "10px" }}
+                  className="flex-column form-control "
+                  placeholder={password}
+                />
+                <ErrorMessage
+                  errors={errors}
+                  name="password"
+                  render={({ message }) => (
+                    <p className="error_alert">{message}</p>
+                  )}
+                />
+                <div className="d-flex align-items-center gap-3">
+                  <a
+                    href="/"
+                    style={{
+                      color: "gray",
+                      textDecoration: "none",
+                      fontSize: 15,
+                    }}
+                  >
+                    Forget password ?
+                  </a>
+                  <MyButton
+                    className={"flex-column"}
+                    bgColor={"#4D77E3"}
+                    color={"white"}
+                    text={"Login"}
+                    textSize={14}
+                    fontWeight={500}
+                    type={"submit"}
+                    paddingY={"7px"}
+                    paddingX={"30px"}
+                  />
+                </div>
               </div>
-            </div>
+            </form>
             <div className="flex-row ">
               <img
                 className="imgClass"

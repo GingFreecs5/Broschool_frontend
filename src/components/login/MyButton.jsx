@@ -10,6 +10,7 @@ function MyButton({
   fontWeight,
   className,
   link,
+  type,
 }) {
   const padding = `${paddingY} ${paddingX}`;
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ function MyButton({
     <button
       onClick={() => navigate(link)}
       className={className}
+      type={type}
       onMouseEnter={(e) => (e.target.style.background = "#4d5fe3")}
       onMouseLeave={(e) => (e.target.style.background = bgColor)}
       style={{
