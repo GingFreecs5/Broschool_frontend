@@ -7,13 +7,15 @@ import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import {
   backButton,
-  birthDate,
+  phoneNumber,
+  errorMessageFieldRequired,
   loginButton,
   residenceTown,
   schoolLevel,
   schoolName,
   signupButton,
   signupText,
+  errorMessagePhoneNumber,
 } from "../components/utils/LabelNames";
 function SignupNext() {
   const {
@@ -23,9 +25,9 @@ function SignupNext() {
   } = useForm();
   return (
     <div className="d-flex flex-row bgImg">
-      <div className="loginContainer col-xxl-6 col-xl-7 col-lg-9 col-md-10 col-12   mx-auto ">
-        <div className="card_class d-flex flex-column flex-wrap  gap-4  p-5 mx-3">
-          <div className=" flex-row flex-wrap d-flex justify-content-between   ">
+      <div className="loginContainer col-xxl-5 col-xl-7 col-lg-9 col-md-10 col-12   mx-auto ">
+        <div className="card_container d-flex flex-column  gap-4  p-5 mx-3">
+          <div className="header_container gap-3 flex-row flex-wrap d-flex justify-content-between     ">
             <Logo className={"flex-column"} />
             <MyButton
               className={"flex-column"}
@@ -40,8 +42,8 @@ function SignupNext() {
             />
           </div>
           <div className="form_container flex-wrap d-flex justify-content-between  align-items-center  flex-row ">
-            <form onSubmit={handleSubmit(() => alert("logged"))}>
-              <div className="d-flex mx-5  flex-row flex-column gap-3  ">
+            <form onSubmit={handleSubmit(() => alert("logged"))} noValidate>
+              <div className="d-flex  flex-row flex-column gap-3  ">
                 <span
                   className="flex-column"
                   style={{
@@ -55,17 +57,21 @@ function SignupNext() {
                   <div>
                     {" "}
                     <input
-                      {...register("birthDate", {
-                        required: "This field is required",
+                      {...register("phoneNumber", {
+                        required: errorMessageFieldRequired,
+                        pattern: {
+                          value: /(\+212|0)([ \-_/]*)(\d[ \-_/]*){9}/,
+                          message: errorMessagePhoneNumber,
+                        },
                       })}
                       type="text"
                       style={{ borderRadius: "10px" }}
                       className=" flex-column form-control "
-                      placeholder={birthDate}
+                      placeholder={phoneNumber}
                     />
                     <ErrorMessage
                       errors={errors}
-                      name="birthDate"
+                      name="phoneNumber"
                       render={({ message }) => (
                         <p className="error_alert">{message}</p>
                       )}
@@ -75,7 +81,7 @@ function SignupNext() {
                     {" "}
                     <input
                       {...register("residenceTown", {
-                        required: "This field is required",
+                        required: errorMessageFieldRequired,
                       })}
                       type="text"
                       style={{ borderRadius: "10px" }}
@@ -93,7 +99,7 @@ function SignupNext() {
                   <div>
                     <input
                       {...register("schoolName", {
-                        required: "This field is required",
+                        required: errorMessageFieldRequired,
                       })}
                       type="text"
                       style={{ borderRadius: "10px" }}
@@ -112,7 +118,7 @@ function SignupNext() {
                     {" "}
                     <input
                       {...register("schoolLevel", {
-                        required: "This field is required",
+                        required: errorMessageFieldRequired,
                       })}
                       type="text"
                       style={{ borderRadius: "10px" }}
@@ -144,6 +150,7 @@ function SignupNext() {
                       className={"flex-column"}
                       bgColor={"#4D77E3"}
                       color={"white"}
+                      type={"submit"}
                       text={signupButton}
                       textSize={14}
                       fontWeight={500}

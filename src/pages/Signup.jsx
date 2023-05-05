@@ -8,6 +8,14 @@ import { ErrorMessage } from "@hookform/error-message";
 import { useNavigate } from "react-router-dom";
 import {
   email,
+  errorMessageCharacterSpecial,
+  errorMessageEmailInvalid,
+  errorMessageFiedlMaxSize,
+  errorMessageFieldRequired,
+  errorMessageLetterOnly,
+  errorMessageMinimumCharacters,
+  errorMessageMinimumLetter,
+  errorMessageMinimumNumber,
   firstName,
   lastName,
   loginButton,
@@ -24,8 +32,8 @@ function Signup() {
   return (
     <div className="d-flex flex-row bgImg">
       <div className="loginContainer col-xxl-6 col-xl-7 col-lg-9 col-md-10 col-12   mx-auto ">
-        <div className="card_class d-flex flex-column flex-wrap  gap-4  p-5 mx-3 ">
-          <div className=" flex-row flex-wrap d-flex justify-content-between   ">
+        <div className="card_container d-flex flex-column   gap-4  p-5 mx-3 ">
+          <div className="header_container gap-3 flex-row flex-wrap d-flex justify-content-between   ">
             <Logo className={"flex-column"} />
             <MyButton
               className={"flex-column"}
@@ -42,7 +50,7 @@ function Signup() {
           <div className="form_container flex-wrap d-flex justify-content-between flex-row ">
             <form
               onSubmit={handleSubmit(() => navigate("/signup/2"))}
-              novalidate
+              noValidate
             >
               <div className="d-flex mx-5  flex-row flex-column gap-3  ">
                 <span
@@ -58,7 +66,15 @@ function Signup() {
                   <div>
                     <input
                       {...register("firstName", {
-                        required: "This field is required",
+                        required: errorMessageFieldRequired,
+                        maxLength: {
+                          message: errorMessageFiedlMaxSize,
+                          value: 20,
+                        },
+                        pattern: {
+                          value: /^[a-zA-Z]+$/,
+                          message: errorMessageLetterOnly,
+                        },
                       })}
                       type="text"
                       style={{ borderRadius: "10px" }}
@@ -77,7 +93,15 @@ function Signup() {
                     {" "}
                     <input
                       {...register("lastName", {
-                        required: "This field is required",
+                        required: errorMessageFieldRequired,
+                        maxLength: {
+                          message: errorMessageFiedlMaxSize,
+                          value: 20,
+                        },
+                        pattern: {
+                          value: /^[a-zA-Z]+$/,
+                          message: errorMessageLetterOnly,
+                        },
                       })}
                       type="text"
                       style={{ borderRadius: "10px" }}
@@ -96,7 +120,12 @@ function Signup() {
                     {" "}
                     <input
                       {...register("email", {
-                        required: "This field is required",
+                        required: errorMessageFieldRequired,
+                        pattern: {
+                          value:
+                            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                          message: errorMessageEmailInvalid,
+                        },
                       })}
                       type="email"
                       style={{ borderRadius: "10px" }}
@@ -115,7 +144,21 @@ function Signup() {
                     {" "}
                     <input
                       {...register("password", {
-                        required: "This field is required",
+                        required: errorMessageFieldRequired,
+                        minLength: {
+                          value: 8,
+                          message: errorMessageMinimumCharacters,
+                        },
+                        validate: {
+                          atLeastOneNumber: (value) =>
+                            /\d/.test(value) || errorMessageMinimumNumber,
+                          atLeastOneLetter: (value) =>
+                            /[a-zA-Z]/.test(value) || errorMessageMinimumLetter,
+                          atLeastOneSpecialCharacter: (value) =>
+                            /[`!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/.test(
+                              value
+                            ) || errorMessageCharacterSpecial,
+                        },
                       })}
                       type="password"
                       style={{ borderRadius: "10px" }}

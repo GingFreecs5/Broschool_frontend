@@ -3,6 +3,7 @@ import "../App.css";
 import MyButton from "../components/login/MyButton";
 import {
   email,
+  errorMessageFieldRequired,
   loginText,
   password,
   signupButton,
@@ -21,8 +22,8 @@ function Login() {
   return (
     <div className="d-flex flex-row  bgImg">
       <div className="loginContainer col-xxl-6 col-xl-7 col-lg-9 col-md-10 col-12 mx-auto ">
-        <div className="card_class d-flex flex-column flex-wrap  gap-4  p-5  mx-3 ">
-          <div className=" flex-row flex-wrap d-flex justify-content-between   ">
+        <div className="card_container d-flex flex-column   gap-4  p-5  mx-3 ">
+          <div className=" header_container gap-3 flex-row flex-wrap d-flex justify-content-between   ">
             <Logo className={"flex-column"} />
             <MyButton
               className={"flex-column"}
@@ -49,7 +50,9 @@ function Login() {
                   {loginText}
                 </span>
                 <input
-                  {...register("email", { required: "This field is required" })}
+                  {...register("email", {
+                    required: errorMessageFieldRequired,
+                  })}
                   type="email"
                   style={{ borderRadius: "10px" }}
                   className=" flex-column form-control "
@@ -66,7 +69,7 @@ function Login() {
                 <div className="valid-feedback">Looks good!</div>
                 <input
                   {...register("password", {
-                    required: "This field is required",
+                    required: errorMessageFieldRequired,
                   })}
                   type="password"
                   style={{ borderRadius: "10px" }}

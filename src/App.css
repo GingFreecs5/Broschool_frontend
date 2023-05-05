@@ -12,7 +12,7 @@
 
 }
 
-.card_class{
+.card_container {
  
   background-color: #EDE9E9;
   margin-top: 20%;
@@ -27,7 +27,11 @@
 @media screen and (max-width: 780px) { 
 
   .imgClass{ display: none; }
- 
+  .card_container {
+    align-items: center;
+  }
+  
+
 
   
   }
