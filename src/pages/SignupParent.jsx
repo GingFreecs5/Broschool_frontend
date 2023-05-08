@@ -1,12 +1,12 @@
 import React from "react";
 import "../App.css";
 import MyButton from "../components/login/MyButton";
-import ImgLearning from "../assets/shutterstock1067946317-1_750_1080-removebg-preview 1.png";
+import ImgLearning from "../assets/loginImg1-removebg-preview 1 (1).png";
 import Logo from "../components/Logo";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+import { useNavigate } from "react-router-dom";
 import {
-  backButton,
   errorMessageMinimumCharacters,
   email,
   errorMessageCharacterSpecial,
@@ -14,27 +14,31 @@ import {
   password,
   errorMessageMinimumLetter,
   errorMessageMinimumNumber,
+  phoneNumber,
+  errorMessageFiedlMaxSize,
   errorMessageFieldRequired,
+  errorMessageLetterOnly,
+  firstName,
+  lastName,
   loginButton,
-  residenceTown,
-  schoolName,
-  signupButton,
+  errorMessagePhoneNumber,
+  signupSecondLink,
   signupText,
-  schoolLevel,
-  schoolLevels,
+  signupButton,
 } from "../utils/LabelNames";
 import Footer from "../components/login/Footer";
-function SignupNext() {
+function SignupParent() {
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
+  const navigate = useNavigate();
   return (
-    <div className="d-flex  bgImg">
+    <div className="d-flex bgImg">
       <div className="loginContainer col-xxl-6 col-xl-7 col-lg-9 col-md-10 col-12   mx-auto ">
-        <div className="card_container d-flex flex-column  gap-4  p-5 mx-3">
-          <div className="header_container gap-3  flex-wrap d-flex justify-content-between     ">
+        <div className="card_container d-flex flex-column   gap-4  p-5 mx-3 ">
+          <div className="header_container gap-3 flex-wrap d-flex justify-content-between   ">
             <Logo />
             <MyButton
               bgColor={"#4D77E3"}
@@ -47,10 +51,14 @@ function SignupNext() {
               paddingX={"30px"}
             />
           </div>
-          <div className="form_container  d-flex justify-content-between  align-items-center  flex-row ">
-            <form onSubmit={handleSubmit(() => alert("logged"))} noValidate>
-              <div className="d-flex mx-5  flex-row flex-column gap-3  ">
+          <div className="form_container flex-wrap d-flex justify-content-between align-items-center">
+            <form
+              onSubmit={handleSubmit(() => navigate(signupSecondLink))}
+              noValidate
+            >
+              <div className="d-flex mx-5  flex-column gap-3  ">
                 <span
+                  className="flex-column"
                   style={{
                     color: "#000000",
                     fontWeight: "bold",
@@ -58,39 +66,29 @@ function SignupNext() {
                 >
                   {signupText}
                 </span>
-                <div className="d-flex flex-column gap-3 ">
+                <div className="d-flex  flex-column align-items-center gap-3">
                   <div>
-                    {" "}
                     <input
-                      {...register("residenceTown", {
+                      {...register("firstName", {
                         required: errorMessageFieldRequired,
+                        maxLength: {
+                          message: errorMessageFiedlMaxSize,
+                          value: 20,
+                        },
+                        pattern: {
+                          value: /^[a-zA-Z]+$/,
+                          message: errorMessageLetterOnly,
+                        },
                       })}
                       type="text"
                       style={{ borderRadius: "10px" }}
-                      className="  form-control "
-                      placeholder={residenceTown}
-                    />{" "}
-                    <ErrorMessage
-                      errors={errors}
-                      name="residenceTown"
-                      render={({ message }) => (
-                        <p className="error_alert">{message}</p>
-                      )}
+                      className=" form-control "
+                      placeholder={firstName}
+                      defaultValue={"Yassin"}
                     />
-                  </div>
-                  <div>
-                    <input
-                      {...register("schoolName", {
-                        required: errorMessageFieldRequired,
-                      })}
-                      type="text"
-                      style={{ borderRadius: "10px" }}
-                      className="  form-control "
-                      placeholder={schoolName}
-                    />{" "}
                     <ErrorMessage
                       errors={errors}
-                      name="schoolName"
+                      name="firstName"
                       render={({ message }) => (
                         <p className="error_alert">{message}</p>
                       )}
@@ -98,20 +96,51 @@ function SignupNext() {
                   </div>
                   <div>
                     {" "}
-                    <select
-                      name="schoolLevel"
-                      className="form-select"
-                      {...register("schoolLevel", {
-                        required: "select one option",
+                    <input
+                      {...register("lastName", {
+                        required: errorMessageFieldRequired,
+                        maxLength: {
+                          message: errorMessageFiedlMaxSize,
+                          value: 20,
+                        },
+                        pattern: {
+                          value: /^[a-zA-Z]+$/,
+                          message: errorMessageLetterOnly,
+                        },
                       })}
-                    >
-                      {schoolLevels.map((level) => (
-                        <option key={level}>{level}</option>
-                      ))}
-                    </select>
+                      defaultValue={"Akkab"}
+                      type="text"
+                      style={{ borderRadius: "10px" }}
+                      className=" form-control "
+                      placeholder={lastName}
+                    />
                     <ErrorMessage
                       errors={errors}
-                      name="schoolLevel"
+                      name="lastName"
+                      render={({ message }) => (
+                        <p className="error_alert">{message}</p>
+                      )}
+                    />
+                  </div>
+                  <div>
+                    {" "}
+                    <input
+                      {...register("phoneNumber", {
+                        required: errorMessageFieldRequired,
+                        pattern: {
+                          value: /(\+212|0)([ \-_/]*)(\d[ \-_/]*){9}/,
+                          message: errorMessagePhoneNumber,
+                        },
+                      })}
+                      type="text"
+                      style={{ borderRadius: "10px" }}
+                      className=" form-control "
+                      placeholder={phoneNumber}
+                      defaultValue={"0653500709"}
+                    />
+                    <ErrorMessage
+                      errors={errors}
+                      name="phoneNumber"
                       render={({ message }) => (
                         <p className="error_alert">{message}</p>
                       )}
@@ -174,26 +203,17 @@ function SignupNext() {
                       )}
                     />
                   </div>
-                  <div className="d-flex align-items-center gap-3">
+
+                  <div className="d-flex  ">
                     <MyButton
                       bgColor={"#4D77E3"}
                       color={"white"}
-                      text={backButton}
-                      link={"/signup/1"}
-                      textSize={14}
-                      fontWeight={500}
-                      paddingY={"7px"}
-                      paddingX={"30px"}
-                    />
-                    <MyButton
-                      bgColor={"#4D77E3"}
-                      color={"white"}
-                      type={"submit"}
                       text={signupButton}
                       textSize={14}
                       fontWeight={500}
                       paddingY={"7px"}
                       paddingX={"30px"}
+                      type={"submit"}
                     />
                   </div>
                 </div>
@@ -215,4 +235,4 @@ function SignupNext() {
   );
 }
 
-export default SignupNext;
+export default SignupParent;

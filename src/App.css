@@ -24,16 +24,20 @@
   margin-left: 8px;
   margin-bottom: 0px;
 }
-@media screen and (max-width: 780px) { 
+@media screen and (max-width: 830px) { 
 
   .imgClass{ display: none; }
   .card_container {
     align-items: center;
   }
-  
 
 
-  
-  }
+    }
  
-  
+    @media screen and (min-width: 1720px) { 
+
+     .loginContainer{
+      width: 40%;
+     }
+        }
+     

@@ -7,21 +7,19 @@ import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { useNavigate } from "react-router-dom";
 import {
-  email,
-  errorMessageCharacterSpecial,
-  errorMessageEmailInvalid,
+  phoneNumber,
   errorMessageFiedlMaxSize,
   errorMessageFieldRequired,
   errorMessageLetterOnly,
-  errorMessageMinimumCharacters,
-  errorMessageMinimumLetter,
-  errorMessageMinimumNumber,
   firstName,
   lastName,
   loginButton,
-  password,
+  errorMessagePhoneNumber,
+  signupSecondLink,
   signupText,
-} from "../components/utils/LabelNames";
+  age,
+} from "../utils/LabelNames";
+import Footer from "../components/login/Footer";
 function Signup() {
   const {
     register,
@@ -30,13 +28,12 @@ function Signup() {
   } = useForm();
   const navigate = useNavigate();
   return (
-    <div className="d-flex flex-row bgImg">
+    <div className="d-flex bgImg">
       <div className="loginContainer col-xxl-6 col-xl-7 col-lg-9 col-md-10 col-12   mx-auto ">
         <div className="card_container d-flex flex-column   gap-4  p-5 mx-3 ">
-          <div className="header_container gap-3 flex-row flex-wrap d-flex justify-content-between   ">
-            <Logo className={"flex-column"} />
+          <div className="header_container gap-3 flex-wrap d-flex justify-content-between   ">
+            <Logo />
             <MyButton
-              className={"flex-column"}
               bgColor={"#4D77E3"}
               color={"white"}
               text={loginButton}
@@ -47,12 +44,12 @@ function Signup() {
               paddingX={"30px"}
             />
           </div>
-          <div className="form_container flex-wrap d-flex justify-content-between flex-row ">
+          <div className="form_container flex-wrap d-flex justify-content-between align-items-center">
             <form
-              onSubmit={handleSubmit(() => navigate("/signup/2"))}
+              onSubmit={handleSubmit(() => navigate(signupSecondLink))}
               noValidate
             >
-              <div className="d-flex mx-5  flex-row flex-column gap-3  ">
+              <div className="d-flex mx-5  flex-column gap-3  ">
                 <span
                   className="flex-column"
                   style={{
@@ -62,7 +59,7 @@ function Signup() {
                 >
                   {signupText}
                 </span>
-                <div className="d-flex flex-column align-items-center gap-3">
+                <div className="d-flex  flex-column align-items-center gap-3">
                   <div>
                     <input
                       {...register("firstName", {
@@ -78,8 +75,9 @@ function Signup() {
                       })}
                       type="text"
                       style={{ borderRadius: "10px" }}
-                      className=" flex-column form-control "
+                      className=" form-control "
                       placeholder={firstName}
+                      defaultValue={"Yassin"}
                     />
                     <ErrorMessage
                       errors={errors}
@@ -103,9 +101,10 @@ function Signup() {
                           message: errorMessageLetterOnly,
                         },
                       })}
+                      defaultValue={"Akkab"}
                       type="text"
                       style={{ borderRadius: "10px" }}
-                      className=" flex-column form-control "
+                      className=" form-control "
                       placeholder={lastName}
                     />
                     <ErrorMessage
@@ -119,64 +118,92 @@ function Signup() {
                   <div>
                     {" "}
                     <input
-                      {...register("email", {
+                      {...register("age", {
                         required: errorMessageFieldRequired,
-                        pattern: {
-                          value:
-                            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                          message: errorMessageEmailInvalid,
+                        maxLength: {
+                          message: errorMessageFiedlMaxSize,
+                          value: 3,
                         },
                       })}
-                      type="email"
+                      type="number"
                       style={{ borderRadius: "10px" }}
-                      className=" flex-column form-control "
-                      placeholder={email}
+                      className=" form-control "
+                      defaultValue={"25"}
+                      placeholder={age}
                     />
                     <ErrorMessage
                       errors={errors}
-                      name="email"
+                      name="age"
                       render={({ message }) => (
                         <p className="error_alert">{message}</p>
                       )}
                     />
+                  </div>
+                  <div
+                    className=" d-flex w-100 btn-group justify-content-between"
+                    role="group"
+                    aria-label="Basic radio toggle button group"
+                  >
+                    <div>
+                      {" "}
+                      <input
+                        type="radio"
+                        className=" btn-check"
+                        name="btnradio"
+                        id="btnradio1"
+                        autocomplete="off"
+                        checked
+                      />
+                      <label
+                        className=" btn btn-outline-secondary "
+                        for="btnradio1"
+                      >
+                        Male
+                      </label>
+                    </div>
+                    <div>
+                      {" "}
+                      <input
+                        type="radio"
+                        className="btn-check"
+                        name="btnradio"
+                        id="btnradio2"
+                        autocomplete="off"
+                      />
+                      <label
+                        className="btn btn-outline-secondary"
+                        for="btnradio2"
+                      >
+                        Female
+                      </label>
+                    </div>
                   </div>
                   <div>
                     {" "}
                     <input
-                      {...register("password", {
+                      {...register("phoneNumber", {
                         required: errorMessageFieldRequired,
-                        minLength: {
-                          value: 8,
-                          message: errorMessageMinimumCharacters,
-                        },
-                        validate: {
-                          atLeastOneNumber: (value) =>
-                            /\d/.test(value) || errorMessageMinimumNumber,
-                          atLeastOneLetter: (value) =>
-                            /[a-zA-Z]/.test(value) || errorMessageMinimumLetter,
-                          atLeastOneSpecialCharacter: (value) =>
-                            /[`!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/.test(
-                              value
-                            ) || errorMessageCharacterSpecial,
+                        pattern: {
+                          value: /(\+212|0)([ \-_/]*)(\d[ \-_/]*){9}/,
+                          message: errorMessagePhoneNumber,
                         },
                       })}
-                      type="password"
+                      type="text"
                       style={{ borderRadius: "10px" }}
-                      className="flex-column form-control "
-                      placeholder={password}
+                      className=" form-control "
+                      placeholder={phoneNumber}
+                      defaultValue={"0653500709"}
                     />
                     <ErrorMessage
                       errors={errors}
-                      name="password"
+                      name="phoneNumber"
                       render={({ message }) => (
                         <p className="error_alert">{message}</p>
                       )}
                     />
                   </div>
-
                   <div className="d-flex  ">
                     <MyButton
-                      className={"flex-column "}
                       bgColor={"#4D77E3"}
                       color={"white"}
                       text={"Next"}
@@ -190,7 +217,7 @@ function Signup() {
                 </div>
               </div>
             </form>
-            <div className="flex-row ">
+            <div>
               <img
                 className="imgClass"
                 src={ImgLearning}
@@ -199,33 +226,7 @@ function Signup() {
               />
             </div>
           </div>
-          <div className=" flex-row flex-wrap align-items-baseline d-flex gap-3">
-            <div className="flex-column">
-              <span
-                style={{
-                  fontSize: 20,
-                }}
-              >
-                &copy;
-              </span>
-            </div>
-            <div className="flex-column">
-              {" "}
-              <p style={{ fontSize: 11 }}> Copyright Broschool 2023</p>
-            </div>
-            <div className="flex-column">
-              {" "}
-              <p style={{ fontSize: 11 }}> Terms And Conditions</p>{" "}
-            </div>
-            <div className="flex-column">
-              {" "}
-              <p style={{ fontSize: 11 }}> Privacy Policy</p>
-            </div>
-            <div className="flex-column">
-              {" "}
-              <p style={{ fontSize: 11 }}> Help</p>
-            </div>
-          </div>
+          <Footer />
         </div>
       </div>
     </div>

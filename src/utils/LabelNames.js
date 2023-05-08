@@ -1,6 +1,7 @@
 export const firstName = "First Name";
 export const email = "Email";
 export const lastName = "Last Name";
+export const age = "Age";
 export const password = "Password";
 export const phoneNumber = "Phone number";
 export const residenceTown = "Residence town";
@@ -21,3 +22,16 @@ export const errorMessageMinimumNumber = "At least 1 number";
 export const errorMessageCharacterSpecial = "At least 1 special character";
 export const errorMessageMinimumLetter = "At least 1 letter";
 export const errorMessagePhoneNumber = "Invalid phone number";
+export const signupAsParent = "Sign up as student parent";
+export const signupAsStudent = "Sign up as student";
+export const loginLink = "/";
+export const signupChooseLink = "/signup/choose";
+export const signupFirstLink = "/signup/1";
+export const signupSecondLink = "/signup/2";
+export const signupParentLink = "/signup/parent";
+export const schoolLevels = [
+  "Choose your school level ",
+  "1er year",
+  "2nd year",
+  "3rd year",
+];

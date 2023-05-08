@@ -10,7 +10,7 @@ function Logo({ className }) {
         fontSize: 24,
       }}
     >
-      Broschool
+      BroSchool
     </h1>
   );
 }
