@@ -1,9 +1,18 @@
-import Signup from "./pages/Signup";
-import SignupNext from "./pages/SignupNext";
 import Login from "./pages/Login";
 import SignupChoose from "./pages/SignupChoose";
-import SignupParent from "./pages/SignupParent";
+import SignupAsParent from "./pages/SignupAsParent";
+import SignupAsStudent from "./pages/SignupAsStudent";
+import SignupAsStudent2 from "./pages/SignupAsStudent2";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  signupAsStudentLink,
+  signupAsStudentLink2,
+  signupAsTeacherLink,
+  signupAsTeacherLink2,
+  signupChooseLink,
+} from "./utils/LabelNames";
+import SignupAsTeacher from "./pages/SignupAsTeacher";
+import SignupAsTeacher2 from "./pages/SignupAsTeacher2";
 
 function App() {
   return (
@@ -11,10 +20,28 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<Login />} />
-          <Route exact path="/signup/choose" element={<SignupChoose />} />
-          <Route exact path="/signup/1" element={<Signup />} />
-          <Route exact path="/signup/2" element={<SignupNext />} />
-          <Route exact path="/signup/parent" element={<SignupParent />} />
+          <Route exact path={signupChooseLink} element={<SignupChoose />} />
+          <Route
+            exact
+            path={signupAsStudentLink}
+            element={<SignupAsStudent />}
+          />
+          <Route
+            exact
+            path={signupAsStudentLink2}
+            element={<SignupAsStudent2 />}
+          />
+          <Route
+            exact
+            path={signupAsTeacherLink}
+            element={<SignupAsTeacher />}
+          />
+          <Route
+            exact
+            path={signupAsTeacherLink2}
+            element={<SignupAsTeacher2 />}
+          />
+          <Route exact path="/signup/parent" element={<SignupAsParent />} />
         </Routes>
       </Router>
     </div>

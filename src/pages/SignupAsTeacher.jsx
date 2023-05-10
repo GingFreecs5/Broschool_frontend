@@ -2,7 +2,6 @@ import React from "react";
 import "../App.css";
 import MyButton from "../components/login/MyButton";
 import ImgLearning from "../assets/loginImg1-removebg-preview 1 (1).png";
-import Logo from "../components/Logo";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { useNavigate } from "react-router-dom";
@@ -13,14 +12,13 @@ import {
   errorMessageLetterOnly,
   firstName,
   lastName,
-  loginButton,
   errorMessagePhoneNumber,
-  signupSecondLink,
   signupText,
-  age,
+  signupAsTeacherLink2,
 } from "../utils/LabelNames";
 import Footer from "../components/login/Footer";
-function Signup() {
+import Header from "../components/login/Header";
+export default function SignupAsTeacher() {
   const {
     register,
     formState: { errors },
@@ -31,22 +29,13 @@ function Signup() {
     <div className="d-flex bgImg">
       <div className="loginContainer col-xxl-6 col-xl-7 col-lg-9 col-md-10 col-12   mx-auto ">
         <div className="card_container d-flex flex-column   gap-4  p-5 mx-3 ">
-          <div className="header_container gap-3 flex-wrap d-flex justify-content-between   ">
-            <Logo />
-            <MyButton
-              bgColor={"#4D77E3"}
-              color={"white"}
-              text={loginButton}
-              link={"/"}
-              textSize={14}
-              fontWeight={500}
-              paddingY={"8px"}
-              paddingX={"30px"}
-            />
-          </div>
+          <Header />
           <div className="form_container flex-wrap d-flex justify-content-between align-items-center">
             <form
-              onSubmit={handleSubmit(() => navigate(signupSecondLink))}
+              onSubmit={handleSubmit((data) => {
+                console.log(data);
+                navigate(signupAsTeacherLink2);
+              })}
               noValidate
             >
               <div className="d-flex mx-5  flex-column gap-3  ">
@@ -115,69 +104,79 @@ function Signup() {
                       )}
                     />
                   </div>
-                  <div>
-                    {" "}
+                  <div className="w-100">
                     <input
-                      {...register("age", {
+                      {...register("birthDate", {
                         required: errorMessageFieldRequired,
-                        maxLength: {
-                          message: errorMessageFiedlMaxSize,
-                          value: 3,
-                        },
                       })}
-                      type="number"
-                      style={{ borderRadius: "10px" }}
-                      className=" form-control "
-                      defaultValue={"25"}
-                      placeholder={age}
+                      id="startDate"
+                      className="form-control"
+                      type="text"
+                      placeholder="Birth Date"
+                      onFocus={(e) => (e.target.type = "date")}
+                      onBlur={(e) => (e.target.type = "text")}
                     />
+
                     <ErrorMessage
                       errors={errors}
-                      name="age"
+                      name="birthDate"
                       render={({ message }) => (
                         <p className="error_alert">{message}</p>
                       )}
                     />
                   </div>
-                  <div
-                    className=" d-flex w-100 btn-group justify-content-between"
-                    role="group"
-                    aria-label="Basic radio toggle button group"
-                  >
-                    <div>
-                      {" "}
-                      <input
-                        type="radio"
-                        className=" btn-check"
-                        name="btnradio"
-                        id="btnradio1"
-                        autocomplete="off"
-                        checked
-                      />
-                      <label
-                        className=" btn btn-outline-secondary "
-                        for="btnradio1"
-                      >
-                        Male
-                      </label>
+                  <div className=" w-100 ">
+                    <div
+                      className="btn-group  d-flex justify-content-between"
+                      role="group"
+                      aria-label="Basic radio toggle button group"
+                    >
+                      <div>
+                        <input
+                          {...register("gender", {
+                            required: errorMessageFieldRequired,
+                          })}
+                          type="radio"
+                          value={"Male"}
+                          className=" btn-check"
+                          name="gender"
+                          id="btnradio1"
+                        />
+                        <label
+                          className=" btn btn-outline-secondary "
+                          htmlFor="btnradio1"
+                        >
+                          Male
+                        </label>
+                      </div>
+                      <div>
+                        <input
+                          {...register("gender", {
+                            required: errorMessageFieldRequired,
+                          })}
+                          type="radio"
+                          className="btn-check"
+                          name="gender"
+                          id="btnradio2"
+                          value={"Female"}
+                        />
+                        <label
+                          className="btn btn-outline-secondary"
+                          htmlFor="btnradio2"
+                        >
+                          Female
+                        </label>
+                      </div>
                     </div>
-                    <div>
-                      {" "}
-                      <input
-                        type="radio"
-                        className="btn-check"
-                        name="btnradio"
-                        id="btnradio2"
-                        autocomplete="off"
-                      />
-                      <label
-                        className="btn btn-outline-secondary"
-                        for="btnradio2"
-                      >
-                        Female
-                      </label>
-                    </div>
+                    <ErrorMessage
+                      errors={errors}
+                      name="gender"
+                      render={({ message }) => (
+                        <p className="error_alert">{message}</p>
+                      )}
+                    />
                   </div>
+
                   <div>
                     {" "}
                     <input
@@ -232,5 +231,3 @@ function Signup() {
     </div>
   );
 }
-
-export default Signup;

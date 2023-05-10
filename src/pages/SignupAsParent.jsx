@@ -2,10 +2,8 @@ import React from "react";
 import "../App.css";
 import MyButton from "../components/login/MyButton";
 import ImgLearning from "../assets/loginImg1-removebg-preview 1 (1).png";
-import Logo from "../components/Logo";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import { useNavigate } from "react-router-dom";
 import {
   errorMessageMinimumCharacters,
   email,
@@ -20,40 +18,26 @@ import {
   errorMessageLetterOnly,
   firstName,
   lastName,
-  loginButton,
   errorMessagePhoneNumber,
-  signupSecondLink,
   signupText,
   signupButton,
 } from "../utils/LabelNames";
 import Footer from "../components/login/Footer";
-function SignupParent() {
+import Header from "../components/login/Header";
+export default function SignupAsParent() {
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const navigate = useNavigate();
   return (
     <div className="d-flex bgImg">
       <div className="loginContainer col-xxl-6 col-xl-7 col-lg-9 col-md-10 col-12   mx-auto ">
         <div className="card_container d-flex flex-column   gap-4  p-5 mx-3 ">
-          <div className="header_container gap-3 flex-wrap d-flex justify-content-between   ">
-            <Logo />
-            <MyButton
-              bgColor={"#4D77E3"}
-              color={"white"}
-              text={loginButton}
-              link={"/"}
-              textSize={14}
-              fontWeight={500}
-              paddingY={"8px"}
-              paddingX={"30px"}
-            />
-          </div>
+          <Header />
           <div className="form_container flex-wrap d-flex justify-content-between align-items-center">
             <form
-              onSubmit={handleSubmit(() => navigate(signupSecondLink))}
+              onSubmit={handleSubmit(() => alert("Parent Account created"))}
               noValidate
             >
               <div className="d-flex mx-5  flex-column gap-3  ">
@@ -234,5 +218,3 @@ function SignupParent() {
     </div>
   );
 }
-
-export default SignupParent;
