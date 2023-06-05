@@ -13,13 +13,13 @@ import ImgLearning from "../assets/elearning-portals-cover-picture 1.png";
 import Logo from "../components/Logo";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+
 function Login() {
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-
   return (
     <div className="d-flex flex-row  bgImg">
       <div className="loginContainer col-xxl-6 col-xl-7 col-lg-9 col-md-10 col-12 mx-auto ">
@@ -38,7 +38,7 @@ function Login() {
             />
           </div>
           <div className="form_container flex-wrap d-flex justify-content-between  align-items-center flex-row ">
-            <form onSubmit={handleSubmit(() => alert("hello"))}>
+            <form onSubmit={handleSubmit()}>
               <div className="d-flex mx-5  flex-row flex-column gap-3  ">
                 <span
                   style={{
