@@ -1,7 +1,8 @@
-import Login from "./pages/Login";
+import Login from "./pages/login";
 import SignupChoose from "./pages/SignupChoose";
 import SignupAsParent from "./pages/SignupAsParent";
 import SignupAsStudent from "./pages/SignupAsStudent";
+import "./App.css"
 import SignupAsStudent2 from "./pages/SignupAsStudent2";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {

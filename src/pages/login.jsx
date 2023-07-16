@@ -22,8 +22,8 @@ function Login() {
   } = useForm();
   return (
     <div className="d-flex flex-row  bgImg">
-      <div className="loginContainer col-xxl-6 col-xl-7 col-lg-9 col-md-10 col-12 mx-auto ">
-        <div className="card_container d-flex flex-column   gap-4  p-5  mx-3 ">
+      <div className="col-xxl-6 col-xl-7 col-lg-9 col-md-10 col-12 m-auto ">
+        <div className="card_container d-flex flex-column   gap-4  p-5  m-auto ">
           <div className=" header_container gap-3 flex-row flex-wrap d-flex justify-content-between   ">
             <Logo />
             <MyButton
