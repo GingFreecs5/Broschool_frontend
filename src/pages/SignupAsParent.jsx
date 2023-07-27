@@ -4,24 +4,8 @@ import MyButton from "../components/login/MyButton";
 import ImgLearning from "../assets/loginImg1-removebg-preview 1 (1).png";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import {
-  errorMessageMinimumCharacters,
-  email,
-  errorMessageCharacterSpecial,
-  errorMessageEmailInvalid,
-  password,
-  errorMessageMinimumLetter,
-  errorMessageMinimumNumber,
-  phoneNumber,
-  errorMessageFiedlMaxSize,
-  errorMessageFieldRequired,
-  errorMessageLetterOnly,
-  firstName,
-  lastName,
-  errorMessagePhoneNumber,
-  signupText,
-  signupButton,
-} from "../utils/LabelNames";
+import { useSelector } from 'react-redux'
+
 import Footer from "../components/login/Footer";
 import Header from "../components/login/Header";
 export default function SignupAsParent() {
@@ -30,6 +14,13 @@ export default function SignupAsParent() {
     formState: { errors },
     handleSubmit,
   } = useForm();
+
+  const config = useSelector((state) => state.language.configuration);
+  const { signupButton, email, password, signupText, errorMessageFieldRequired
+    , errorMessageFiedlMaxSize, errorMessageLetterOnly, firstName,
+    lastName, errorMessagePhoneNumber, phoneNumber,
+    errorMessageEmailInvalid, errorMessageMinimumCharacters,
+    errorMessageMinimumNumber, errorMessageMinimumLetter, errorMessageCharacterSpecial } = config;
   return (
     <div className="d-flex bgImg">
       <div className="loginContainer col-xxl-6 col-xl-7 col-lg-9 col-md-10 col-12   m-auto ">

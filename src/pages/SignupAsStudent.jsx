@@ -5,20 +5,15 @@ import ImgLearning from "../assets/loginImg1-removebg-preview 1 (1).png";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { useNavigate } from "react-router-dom";
-import {
-  phoneNumber,
-  errorMessageFiedlMaxSize,
-  errorMessageFieldRequired,
-  errorMessageLetterOnly,
-  firstName,
-  lastName,
-  errorMessagePhoneNumber,
-  signupText,
-  signupAsStudentLink2,
-} from "../utils/LabelNames";
+import { useSelector } from 'react-redux'
 import Footer from "../components/login/Footer";
 import Header from "../components/login/Header";
 export default function SignupAsStudent() {
+  const config = useSelector((state) => state.language.configuration);
+  const linkNames = useSelector((state) => state.language.linkNames);
+  const { signupText, errorMessageFieldRequired, errorMessageFiedlMaxSize, errorMessageLetterOnly,
+    firstName, lastName, errorMessagePhoneNumber, phoneNumber } = config;
+  const { signupAsStudentLink2 } = linkNames;
   const {
     register,
     formState: { errors },

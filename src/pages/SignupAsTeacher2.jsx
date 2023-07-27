@@ -4,25 +4,17 @@ import MyButton from "../components/login/MyButton";
 import ImgLearning from "../assets/shutterstock1067946317-1_750_1080-removebg-preview 1.png";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import {
-  backButton,
-  errorMessageMinimumCharacters,
-  email,
-  errorMessageCharacterSpecial,
-  errorMessageEmailInvalid,
-  password,
-  errorMessageMinimumLetter,
-  errorMessageMinimumNumber,
-  errorMessageFieldRequired,
-  signupButton,
-  signupText,
-  addFiles,
-  description,
-  signupAsTeacherLink,
-} from "../utils/LabelNames";
+import { useSelector } from 'react-redux'
 import Footer from "../components/login/Footer";
 import Header from "../components/login/Header";
 export default function SignupAsTeacher2() {
+  const config = useSelector((state) => state.language.configuration);
+  const linkNames = useSelector((state) => state.language.linkNames);
+  const { signupText, errorMessageFieldRequired, errorMessageMinimumCharacters,
+    errorMessageMinimumNumber, password, email, addFiles, description,
+    errorMessageEmailInvalid, errorMessageMinimumLetter, errorMessageCharacterSpecial,
+    backButton, signupButton } = config;
+  const { signupAsTeacherLink } = linkNames;
   const {
     register,
     formState: { errors },

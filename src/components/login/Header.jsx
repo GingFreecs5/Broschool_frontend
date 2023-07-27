@@ -1,8 +1,11 @@
 import React from "react";
 import Logo from "../Logo";
 import MyButton from "./MyButton";
-import { loginButton } from "../../utils/LabelNames";
+import { useSelector } from 'react-redux'
+
 export default function Header() {
+  const config = useSelector((state) => state.language.configuration);
+  const { loginButton } = config;
   return (
     <div className="header_container gap-3 flex-wrap d-flex justify-content-between   ">
       <Logo />

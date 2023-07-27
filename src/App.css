@@ -1,43 +1,40 @@
-
-.bgImg{
- 
-    background: url(./assets/desktop-wallpaper-website-background-website-login-page-background\ 1.png) no-repeat   ; 
- 
+.bgImg {
+  background: url(./assets/desktop-wallpaper-website-background-website-login-page-background\ 1.png)
+    no-repeat;
 
   background-size: cover;
   height: 100%;
-
 }
-.App{
+.App {
   height: 100vh;
 }
 
 .card_container {
- 
-  background-color: #EDE9E9;
-;
+  background-color: #ede9e9;
   border-radius: 30px;
 }
-.error_alert{
+.error_alert {
   font-size: 12px;
   color: red;
   margin-left: 8px;
   margin-bottom: 0px;
 }
-@media screen and (max-width: 830px) { 
-
-  .imgClass{ display: none; }
+@media screen and (max-width: 830px) {
+  .imgClass {
+    display: none;
+  }
   .card_container {
     align-items: center;
   }
+}
+@media screen and (max-width: 635px) {
+  .footer_container {
+    display: block !important;
+  }
+}
 
-
-    }
- 
-    @media screen and (min-width: 1720px) { 
-
-     .loginContainer{
-      width: 40%;
-     }
-        }
-     
+@media screen and (min-width: 1720px) {
+  .loginContainer {
+    width: 40%;
+  }
+}

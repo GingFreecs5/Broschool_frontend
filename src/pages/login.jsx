@@ -1,20 +1,20 @@
 import React from "react";
 import "../App.css";
 import MyButton from "../components/login/MyButton";
-import {
-  email,
-  errorMessageFieldRequired,
-  loginText,
-  password,
-  signupButton,
-  signupChooseLink,
-} from "../utils/LabelNames";
+
 import ImgLearning from "../assets/elearning-portals-cover-picture 1.png";
 import Logo from "../components/Logo";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+import Footer from "../components/login/Footer";
+import { useSelector } from 'react-redux'
 
 function Login() {
+  const config = useSelector((state) => state.language.configuration);
+  const linkNames = useSelector((state) => state.language.linkNames);
+
+  const { signupButton, email, errorMessageFieldRequired, password } = config;
+  const { signupChooseLink } = linkNames;
   const {
     register,
     formState: { errors },
@@ -22,9 +22,9 @@ function Login() {
   } = useForm();
   return (
     <div className="d-flex flex-row  bgImg">
-      <div className="col-xxl-6 col-xl-7 col-lg-9 col-md-10 col-12 m-auto ">
+      <div className="col-xxl-6 col-xl-7 col-lg-9 col-md-10 col-11 m-auto ">
         <div className="card_container d-flex flex-column   gap-4  p-5  m-auto ">
-          <div className=" header_container gap-3 flex-row flex-wrap d-flex justify-content-between   ">
+          <div className=" header_container gap-3 flex-row  mx-5 flex-wrap d-flex justify-content-between   ">
             <Logo />
             <MyButton
               bgColor={"#4D77E3"}
@@ -46,7 +46,7 @@ function Login() {
                     fontWeight: "bold",
                   }}
                 >
-                  {loginText}
+                  {}
                 </span>
                 <div>
                   <input
@@ -120,19 +120,7 @@ function Login() {
               />
             </div>
           </div>
-          <div className=" flex-row flex-wrap align-items-baseline d-flex gap-3">
-            <span
-              style={{
-                fontSize: 20,
-              }}
-            >
-              &copy;
-            </span>
-            <p style={{ fontSize: 11 }}> Copyright Broschool 2023</p>{" "}
-            <p style={{ fontSize: 11 }}> Terms And Conditions</p>{" "}
-            <p style={{ fontSize: 11 }}> Privacy Policy</p>{" "}
-            <p style={{ fontSize: 11 }}> Help</p>
-          </div>
+          <Footer />
         </div>
       </div>
     </div>
