@@ -26,9 +26,11 @@ export default function SignupChoose() {
               textSize={16}
               fontWeight={500}
               paddingY={"11px"}
-              paddingX={"96px"}
+              minWidth={350}
+
             />
             <MyButton
+
               bgColor={"#4D77E3"}
               color={"white"}
               link={signupParentLink}
@@ -36,18 +38,20 @@ export default function SignupChoose() {
               textSize={16}
               fontWeight={500}
               paddingY={"11px"}
-              paddingX={"70px"}
+              minWidth={350}
+
             />
             <MyButton
+
               bgColor={"#4D77E3"}
               color={"white"}
               link={signupAsTeacherLink}
               text={signupAsTeacher}
               textSize={16}
-              fontWeight={500}
+               fontWeight={500}
               paddingY={"11px"}
-              paddingX={"96px"}
-            />
+              minWidth={350}
+/>
           </div>
           <Footer />
         </div>

@@ -32,6 +32,10 @@
     display: block !important;
   }
 }
+input[type="text"][lang="ar"] {
+  font-family: "Arial", sans-serif; /* Replace with an Arabic font */
+  direction: rtl; /* Right-to-left text direction */
+}
 
 @media screen and (min-width: 1720px) {
   .loginContainer {

@@ -1,0 +1,36 @@
+/* ChooseLanguage.css */
+.language-select-container {
+  /* Add container styles if needed */
+}
+
+.custom-select {
+  width: 100px;
+
+  border: 2px solid #4d77e3;
+  border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.custom-select:hover {
+  border-color: #6a90e9;
+}
+
+.custom-select option {
+  /* Style for options if needed */
+}
+
+/* Styling the dropdown arrow (not supported in all browsers) */
+.custom-select::-ms-expand {
+  display: none;
+}
+
+.custom-select::after {
+  content: "▼";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #4d77e3;
+}
