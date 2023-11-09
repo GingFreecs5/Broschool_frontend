@@ -2,22 +2,48 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   loading: false,
-  userInfo: {}, // for user object
-  userToken: null, // for storing the JWT
+  userInfo: {},
+  userToken: null,
   error: null,
-  success: false, // for monitoring the registration process.
+  success: false,
 };
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    show: (state, { payload }) => {},
-    decrement: (state) => {},
-    incrementByAmount: (state, action) => {},
+    setUser: (state, action) => {
+      state.userInfo = action.payload;
+    },
+    setUserToken: (state, action) => {
+      state.userToken = action.payload;
+    },
+    setLoading: (state, action) => {
+      state.loading = action.payload;
+    },
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
+    setSuccess: (state, action) => {
+      state.success = action.payload;
+    },
+    resetAuthState: (state) => {
+      state.loading = false;
+      state.userInfo = {};
+      state.userToken = null;
+      state.error = null;
+      state.success = false;
+    },
   },
 });
 
-// Action creators are generated for each case reducer function
-export const { show } = authSlice.actions;
+export const {
+  setUser,
+  setUserToken,
+  setLoading,
+  setError,
+  setSuccess,
+  resetAuthState,
+} = authSlice.actions;
 
 export default authSlice.reducer;

@@ -14,14 +14,14 @@ function Login() {
   const linkNames = useSelector((state) => state.language.linkNames);
 
   const { signupButton, email, errorMessageFieldRequired, password } = config;
-  const { signupChooseLink } = linkNames;
+  const { signupChooseLink,resetPasswordLink } = linkNames;
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
   return (
-    <div className="d-flex flex-row  bgImg">
+    <div className="d-flex bgImg">
       <div className="col-xxl-6 col-xl-7 col-lg-9 col-md-10 col-11 m-auto ">
         <div className="card_container d-flex flex-column   gap-4  p-5  m-auto ">
           <div className=" header_container gap-3 flex-row  mx-5 flex-wrap d-flex justify-content-between   ">
@@ -89,7 +89,7 @@ function Login() {
 
                 <div className="d-flex align-items-center gap-3">
                   <a
-                    href="/"
+                    href={resetPasswordLink}
                     style={{
                       color: "gray",
                       textDecoration: "none",
